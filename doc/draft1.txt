@@ -1,0 +1,51 @@
+
+(Some notes...)
+
+Images:
+    FuzzImage:
+        Works as a golden image for docker swarm machines
+        Contains all required components to run as a docker swarm-master, or as a swarm-node
+        In initialization N swarm-machine instances are created from FuzzImage, one of them is selected as a swarm-master, by Bastion
+
+        Can be used in Google Compute Preemptible instances and Amazon Spot Instances.
+
+        swarm-master:
+            Uses docker-machine to set up docker-swarm, including all swarm-machine instances
+            Runs docker swarm discovery service
+            Distributes fuzzing jobs, once recieved from Bastion
+
+        swarm-node:
+            Runs fuzzing docker container(s)
+            Syncs results with Bastion
+                *Time interval
+                *Preemptible and SpotInstance shutdown detection
+
+
+    Bastion:
+        Works as a SSH gateway between outside world and fuzzing cluster
+        Delivers docker image from user to swarm-machines
+        Stores results
+
+
+FuzzImage:
+
+    OS: Ubuntu 16.04
+
+    Contains:
+        docker.io
+        docker-machine
+        swarm
+        swarm discovery service (runs only on swarm-master)
+        scripts for results syncing
+        ssh
+        rsync
+
+Bastion:
+    OS: Ubuntu 16.04
+
+    Contains:
+        ssh
+        scripts for swarm-master control
+        scripts for docker images distribution
+
+Note: User should be able to run whole, or at least partial, implementation on local machine, without too large overhead.
