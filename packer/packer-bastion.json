@@ -1,0 +1,27 @@
+{
+    "builders": [{
+        "type": "googlecompute",
+        "account_file": "../../google-account/cloudfuzzer-default.json",
+        "project_id": "cloudfuzzer-147107",
+        "source_image": "ubuntu-1604-xenial-v20161020",
+        "zone": "europe-west1-d",
+        "disk_size": "10",
+        "disk_type": "pd-standard",
+        "image_description": "cloudfuzzer bastion image",
+        "image_family": "cloudfuzzer-bastion",
+        "image_name": "cloudfuzzer-bastion",
+        "machine_type": "n1-standard-1",
+        "omit_external_ip": "false"
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "script": "../fuzzvm/install.sh"
+    },
+    {
+        "type": "file",
+        "source": "../../vm-keys/",
+        "destination": "/tmp/"
+    }]
+
+
+}
