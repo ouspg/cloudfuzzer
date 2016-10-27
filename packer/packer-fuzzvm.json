@@ -13,7 +13,8 @@
         "machine_type": "n1-standard-1",
         "omit_external_ip": "true",
         "use_internal_ip": "true",
-        "preemptible": "true"
+        "preemptible": "true",
+        "ssh_username": "ubuntu"
     }],
     "provisioners": [{
         "type": "shell",
@@ -24,6 +25,6 @@
         "source": "../../vm-keys/",
         "destination": "/tmp/"
 	}]
-	
+
 
 }
