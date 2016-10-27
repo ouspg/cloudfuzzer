@@ -15,7 +15,7 @@
     }],
     "provisioners": [{
         "type": "shell",
-        "script": "../fuzzvm/install.sh"
+        "script": "../bastion/install.sh"
     },
     {
         "type": "file",
