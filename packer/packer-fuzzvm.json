@@ -11,19 +11,30 @@
         "image_family": "cloudfuzzer-fuzzvm",
         "image_name": "cloudfuzzer-fuzzvm",
         "machine_type": "n1-standard-1",
-        "omit_external_ip": "true",
-        "use_internal_ip": "true",
-        "preemptible": "true"
+        "omit_external_ip": "false",
+        "preemptible": "true",
+        "ssh_username":"ubuntu"
     }],
-    "provisioners": [{
-        "type": "shell",
-        "script": "../fuzzvm/install.sh"
+    "provisioners": [
+    {
+        "type": "file",
+        "source": "../../vm-keys/fuzzvm-key",
+        "destination": "/tmp/fuzzvm-key"
     },
     {
         "type": "file",
-        "source": "../../vm-keys/",
-        "destination": "/tmp/"
-	}]
+        "source": "../../vm-keys/bastion-key.pub",
+        "destination": "/tmp/bastion-key.pub"
+    },
+    {
+        "type": "file",
+        "source": "../../vm-keys/fuzzvm-key.pub",
+        "destination": "/tmp/fuzzvm-key.pub"
+    },
+    {
+        "type": "shell",
+        "script": "../fuzzvm/install.sh"
+    }]
 	
 
 }
