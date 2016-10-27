@@ -5,15 +5,15 @@ Cloudfuzzer is a cloud fuzzing framework. This project is currently in early dev
 Packer creates following images:
 
 1. Bastion
-⋅⋅* Works as a SSH gateway between outside world and fuzzing cluster
-⋅⋅* Delivers docker image from user to swarm-machines
-⋅⋅* Stores results
++ Works as a SSH gateway between outside world and fuzzing cluster
++ Delivers docker image from user to swarm-machines
++ Stores results
 
 2. FuzzImage
-⋅⋅* Works as a golden image for docker swarm machines
-⋅⋅* Contains all required components to run as a docker swarm-master, or as a swarm-node
-⋅⋅* In initialization N swarm-machine instances are created from FuzzImage, one of them is selected as a swarm-master, by Bastion
-⋅⋅* Can be used in Google Compute Preemptible instances and Amazon Spot Instances.
++ Works as a golden image for docker swarm machines
++ Contains all required components to run as a docker swarm-master, or as a swarm-node
++ In initialization N swarm-machine instances are created from FuzzImage, one of them is selected as a swarm-master, by Bastion
++ Can be used in Google Compute Preemptible instances and Amazon Spot Instances.
 
 ⋅⋅* swarm-master:
 ⋅⋅⋅* Uses docker-machine to set up docker-swarm, including all swarm-machine instances
