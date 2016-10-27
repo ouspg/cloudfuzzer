@@ -11,9 +11,7 @@
         "image_family": "cloudfuzzer-fuzzvm",
         "image_name": "cloudfuzzer-fuzzvm",
         "machine_type": "n1-standard-1",
-        "omit_external_ip": "false",
-        "preemptible": "true",
-        "ssh_username":"ubuntu"
+        "ssh_username": "ubuntu"
     }],
     "provisioners": [
     {
@@ -35,6 +33,4 @@
         "type": "shell",
         "script": "../fuzzvm/install.sh"
     }]
-	
-
 }
