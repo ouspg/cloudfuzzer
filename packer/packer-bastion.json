@@ -11,7 +11,7 @@
         "image_family": "cloudfuzzer-bastion",
         "image_name": "cloudfuzzer-bastion",
         "machine_type": "n1-standard-1",
-        "ssh_username":"ubuntu"
+        "ssh_username": "ubuntu"
     }],
     "provisioners": [
     {
