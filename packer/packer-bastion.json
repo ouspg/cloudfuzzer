@@ -1,8 +1,12 @@
 {
+    "variables": {
+        "account_file": "",
+        "project_id": "t"
+    },
     "builders": [{
         "type": "googlecompute",
-        "account_file": "../../google-account/cloudfuzzer-default.json",
-        "project_id": "cloudfuzzer-147107",
+        "account_file": "{{user `account_file`}}",
+        "project_id": "{{user `project_id`}}",
         "source_image": "ubuntu-1604-xenial-v20161020",
         "zone": "europe-west1-d",
         "disk_size": "10",
@@ -16,12 +20,12 @@
     "provisioners": [
     {
         "type": "file",
-        "source": "../../vm-keys/bastion-key",
+        "source": "../vm-keys/bastion-key",
         "destination": "/tmp/bastion-key"
     },
     {
         "type": "file",
-        "source": "../../vm-keys/fuzzvm-key.pub",
+        "source": "../vm-keys/fuzzvm-key.pub",
         "destination": "/tmp/fuzzvm-key.pub"
     },
     {
