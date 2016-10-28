@@ -26,5 +26,20 @@ Packer creates following images:
 * Time interval
 * Preemptible and SpotInstance shutdown detection
 
+## Setup
+
+### ssh-keys
+
+Packer is used to provision ssh keys to the bastion and fuzzvm images.
+
+By default keys should be named bastion-key, bastion-key.pub and fuzzvm-key, fuzzvm-key.pub and should locate in folder ./vm-keys.
+
+You can use ./scripts/create-keys.sh to create rsa 4096 keys for you.
+
+Keys are provisioned so that bastion can access all machines created from fuzzvm-image, and fuzzvm can access all other fuzzvms and bastion.
+(Currently there are no separate users for different operations, so you get full root access with these keys.)
+
+
 # Requirements:
 * [Packer](https://www.packer.io/) 0.11.0
+
