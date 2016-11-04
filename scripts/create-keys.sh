@@ -6,7 +6,7 @@ cd $(dirname "$(readlink -f "$0")");
 #Create vm-keys folder, if it doesn't exist.
 if [ ! -d ../vm-keys ]; then
 	mkdir -p ../vm-keys;
-
+fi
 cd ../vm-keys;
 
 #Create keys for bastion
@@ -21,9 +21,8 @@ fi
 #Create keys for fuzzvm
 if [ ! -f ./fuzzvm-key ]; then
 	echo "No keys for fuzzvm..."
-	echo "Generating: $(pwd)/fuzzvm-key and $(pwd)/fuzzvm-key.pub"	
+	echo "Generating: $(pwd)/fuzzvm-key and $(pwd)/fuzzvm-key.pub"
 	ssh-keygen -N '' -t rsa -b 4096 -C "fuzzvm" -f fuzzvm-key
 else
 	echo "Keys for fuzzvm already exist..."
 fi
-
