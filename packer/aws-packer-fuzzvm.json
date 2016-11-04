@@ -1,20 +1,16 @@
 {
     "variables": {
-        "account_file": "{{env `ACCOUNT_FILE`}}",
-        "project_id": "{{env `PROJECT_ID`}}"
+        "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
     },
     "builders": [{
-        "type": "googlecompute",
-        "account_file": "{{user `account_file`}}",
-        "project_id": "{{user `project_id`}}",
-        "source_image": "ubuntu-1604-xenial-v20161020",
-        "zone": "europe-west1-d",
-        "disk_size": "10",
-        "disk_type": "pd-standard",
-        "image_description": "cloudfuzzer fuzzing image",
-        "image_family": "cloudfuzzer-fuzzvm",
-        "image_name": "cloudfuzzer-fuzzvm",
-        "machine_type": "n1-standard-1",
+        "type": "amazon-ebs",
+        "access_key": "{{user `aws_access_key`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "region": "eu-central-1",
+        "instance_type": "t2.micro",
+        "source_ami": "ami-b87881d7",
+        "ami_name": "cloudfuzzer-fuzzvm",
         "ssh_username": "ubuntu"
     }],
     "provisioners": [
