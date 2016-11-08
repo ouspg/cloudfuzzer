@@ -56,6 +56,9 @@ and run Packer build with:
 
 packer build -var-file=/path/to/your/variables.json packer-bastion.json
 
+# Note
+
+Cloudfuzzer nodes are not supposed to be visible in public network. No TLS is used in them and docker daemon can be accessed from network. They should be connected via bastion.
+
 # Requirements:
 * [Packer](https://www.packer.io/) 0.11.0
-
