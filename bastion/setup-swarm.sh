@@ -6,13 +6,13 @@
 
 ADDRESSES="$@"
 
-echo "FuzzVMs: ADDRESSES"
+echo "FuzzVMs: $ADDRESSES"
 
 echo "Checking connection to all FuzzVMs."
 
 for fuzzvm in $ADDRESSES; do
 	echo "Checking $fuzzvm"
-	ssh $fuzzvm -o ConnectTimeout=10 'echo -n $HOSTNAME\($(hostname -I | awk '\''{print $1}'\'')\);' && echo " - Online"
+	ssh $fuzzvm -o StrictHostKeyChecking=no -o ConnectTimeout=10 'echo -n $HOSTNAME\($(hostname -I | awk '\''{print $1}'\'')\);' && echo " - Online"
 	if [ $? -ne 0 ]; then
 		echo "Couldn't reach host: $fuzzvm"
 		echo "Before rerunning this script:"
@@ -29,4 +29,3 @@ SWARM_NODES=$@;
 echo "Selected $SWARM_MASTER as swarm master"
 echo "Starting swarm-create.sh on swarm master"
 ssh $SWARM_MASTER "scripts/swarm-create.sh $SWARM_NODES";
-

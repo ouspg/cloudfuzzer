@@ -1,7 +1,7 @@
 {
     "variables": {
-        "account_file": "",
-        "project_id": ""
+        "account_file": "{{env `ACCOUNT_FILE`}}",
+        "project_id": "{{env `PROJECT_ID`}}"
     },
     "builders": [{
         "type": "googlecompute",
