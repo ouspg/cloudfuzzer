@@ -1,5 +1,5 @@
 RED='\033[0;31m'
-GREEN='\033[0;31m'
+GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 if nc -zw1 www.google.com 80; then
