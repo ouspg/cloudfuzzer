@@ -25,6 +25,11 @@
     },
     {
         "type": "file",
+        "source": "../fuzzvm",
+        "destination": "/tmp/scripts"
+    },
+    {
+        "type": "file",
         "source": "../vm-keys/bastion-key.pub",
         "destination": "/tmp/bastion-key.pub"
     },

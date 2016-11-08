@@ -1,7 +1,7 @@
 {
     "variables": {
         "account_file": "",
-        "project_id": "t"
+        "project_id": ""
     },
     "builders": [{
         "type": "googlecompute",
@@ -22,6 +22,11 @@
         "type": "file",
         "source": "../vm-keys/bastion-key",
         "destination": "/tmp/bastion-key"
+    },
+    {
+        "type": "file",
+        "source": "../bastion",
+        "destination": "/tmp/scripts"
     },
     {
         "type": "file",
