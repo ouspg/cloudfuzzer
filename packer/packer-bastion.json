@@ -1,9 +1,12 @@
 {
     "variables": {
-        "account_file": "{{env `ACCOUNT_FILE`}}",
-        "project_id": "{{env `PROJECT_ID`}}"
+        "account_file": "",
+        "project_id": "",
+        "aws_access_key": "",
+        "aws_secret_key": ""
     },
     "builders": [{
+        "name": "gcloud",
         "type": "googlecompute",
         "account_file": "{{user `account_file`}}",
         "project_id": "{{user `project_id`}}",
@@ -15,6 +18,17 @@
         "image_family": "cloudfuzzer-bastion",
         "image_name": "cloudfuzzer-bastion",
         "machine_type": "n1-standard-1",
+        "ssh_username": "ubuntu"
+    },
+    {
+        "name": "aws",
+        "type": "amazon-ebs",
+        "access_key": "{{user `aws_access_key`}}",
+        "secret_key": "{{user `aws_secret_key`}}",
+        "region": "eu-central-1",
+        "instance_type": "t2.micro",
+        "source_ami": "ami-b87881d7",
+        "ami_name": "cloudfuzzer-bastion",
         "ssh_username": "ubuntu"
     }],
     "provisioners": [
