@@ -2,6 +2,10 @@
 
 #usage: upload-dockerimage.sh <bastion> <fuzzvm>
 
+#Following gives instance ips from gcloud (bastion included):
+#gcloud compute instances list --format=text \
+#    | grep '^networkInterfaces\[[0-9]\+\]\.networkIP:' | sed 's/^.* //g'
+
 ADDRESSES="$@"
 
 echo "Bastion: $1"
