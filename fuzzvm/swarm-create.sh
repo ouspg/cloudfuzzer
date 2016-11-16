@@ -6,13 +6,13 @@
 
 
 MASTER_ADDRESS=$1
-
+shift;
 NODE_ADDRESSES=$@
+
+scripts/setup-node.sh $MASTER_ADDRESS $MASTER_ADDRESS;
 
 echo "Starting docker swarm discovery service."
 docker run -d -p "8500:8500" -h "consul" progrium/consul -server -bootstrap;
-
-sleep 5;
 
 echo "Starting docker swarm manager container"
 docker run -d -p 4000:4000 swarm manage -H :4000 --advertise $MASTER_ADDRESS:4000 consul://$MASTER_ADDRESS:8500;
@@ -23,6 +23,8 @@ for node in $NODE_ADDRESSES; do
 	ssh -o StrictHostKeyChecking=no $node "scripts/setup-node.sh $node $MASTER_ADDRESS";
 done
 
-echo "Swarm setup completed."
+echo "Swarm setup completed. Waiting 10s for status update."
 #Print docker info
+sleep 10;
+
 docker -H :4000 info

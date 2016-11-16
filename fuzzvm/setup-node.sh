@@ -8,8 +8,9 @@ OWN_ADDRESS=$1;
 MASTER_ADDRESS=$2;
 
 
+echo ""
 echo "Setting up new node:"
-echo "Swarm master address: $MASTER_IP"
+echo "Swarm master address: $MASTER_ADDRESS"
 echo "Node to setup: $OWN_ADDRESS"
 
 
