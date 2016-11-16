@@ -9,12 +9,12 @@ echo "Saving image to bastion."
 
 IMAGE="default-image.tar"
 
-cat | pv | > $IMAGE
+cat > $IMAGE
 
-for node in $(cat $HOME/address_nodes): 
+for node in $(cat $HOME/address_nodes) 
 do
     echo "FuzzVM: $node"
-    cat $IMAGE | bzip2 | pv | ssh $node "bunzip2 | docker load;";
+    cat $IMAGE | bzip2 | ssh $node "bunzip2 | docker load;";
 done
 
 echo "Removing image from bastion."
