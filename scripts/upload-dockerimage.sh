@@ -1,15 +1,14 @@
 #!/bin/bash
 
-#usage: upload-dockerimage.sh <bastion> <fuzzvm1> <fuzzvm2> ...
+#usage: upload-dockerimage.sh <docker-image> <bastion> <fuzzvm1> <fuzzvm2> ...
 
-ADDRESSES="$@"
+#example: ./upload-dockerimage.sh <docker-image> <bastion> `./get-gcloud-fuzzvm-ips.sh`
 
-echo "Bastion: $1"
+echo "Image name: $1"
+echo "Bastion: $2"
 
-## Todo: this must be modified, it's currently very slow and does same job multiple times
-
-for i in ${@:2}
+for i in ${@:3}
 do
     echo "FuzzVM: $i"
-    docker save testi/myapp  | gzip  | pv | ssh ubuntu@$1 "cat | pv | ssh $i \"docker load\" "
+    docker save $1  | gzip  | pv | ssh ubuntu@$2 "cat | pv | ssh $i \"docker load\" " &
 done
