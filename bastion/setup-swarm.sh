@@ -26,8 +26,6 @@ for fuzzvm in $ADDRESSES; do
 		echo "Check that you provided valid address for FuzzVM instance, in a form that can be used in ssh <address>."
 		echo "Also check that you are using correct username, that has the ssh-keys set."
 		exit;
-	else
-
 	fi
 done
 
