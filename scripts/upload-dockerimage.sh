@@ -7,8 +7,4 @@
 echo "Image name: $1"
 echo "Bastion: $2"
 
-for i in ${@:3}
-do
-    echo "FuzzVM: $i"
-    docker save $1  | gzip  | pv | ssh ubuntu@$2 "cat | pv | ssh $i \"docker load\" "
-done
+docker save $1 | ssh ubuntu@$2 "~/scripts/distribute-docker-image.sh"
