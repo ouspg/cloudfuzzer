@@ -15,7 +15,7 @@ You can use ./scripts/create-keys.sh to create rsa 4096 keys for you.
 Keys are provisioned so that bastion can access all machines created from fuzzvm-image, and fuzzvm can access all other fuzzvms and bastion.
 (Currently there are no separate users for different operations, so you get full root access with these keys.)
 
-### Google Compute Engine for Packer
+## Using Packer
 
 Using Google Compute Engine with Packer is documented in: https://www.packer.io/docs/builders/googlecompute.html
 
@@ -24,15 +24,26 @@ By default, packer files for bastion and fuzzvm use use_variables for account_fi
 One way to use them is to make a separate json-file:
 ```
 {
-	"account_file":	"/path/to/your/account_file.json",
-	"project_id":	"your_cloudfuzzer_project_id"
+    "account_file":	"/path/to/your/account_file.json",
+    "project_id":	"your_cloudfuzzer_project_id"
+    "aws_access_key": "access_key",
+    "aws_secret_key": "secret_key"
 }
 ```
 
 and run Packer build with:
+
+Google Cloud
 ```
-packer build -var-file=/path/to/your/variables.json packer-bastion.json
+packer build -only=gcloud -var-file=/path/to/your/variables.json packer-bastion.json
 ```
+
+AWS
+```
+packer build -only=aws -var-file=/path/to/your/variables.json packer-bastion.json
+```
+
+You can use -force if you want Packer to rewrite existing images in cloud platform.
 
 ## Following images are created by Packer.
 
