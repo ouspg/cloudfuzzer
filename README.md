@@ -45,7 +45,17 @@ packer build -only=aws -var-file=/path/to/your/variables.json packer-bastion.jso
 
 You can use -force if you want Packer to rewrite existing images in cloud platform.
 
-## Following images are created by Packer.
+You must create
+* N fuzzvm
+* 1 bastion
+
+
+## Setting it up
+
+* ssh bastion "scripts/setup-swarm <nodes>"
+* docker save <img> | ssh bastion "scripts/distribute-docker-image.sh"
+
+## Images description
 
 Bastion
 * Works as a SSH gateway between outside world and fuzzing cluster
@@ -76,7 +86,6 @@ swarm-node:
 # Note
 
 Cloudfuzzer nodes are not supposed to be visible in public network. No TLS is used in them and docker daemon can be accessed from network. They should be connected via bastion.
-
 
 
 License
