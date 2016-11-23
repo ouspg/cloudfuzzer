@@ -28,3 +28,6 @@ cat /tmp/fuzzvm-key.pub >> $HOME/.ssh/authorized_keys
 mv /tmp/scripts $HOME/
 
 chmod +x $HOME/scripts/*
+
+sudo passwd ubuntu -l
+
