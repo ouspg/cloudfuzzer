@@ -44,6 +44,11 @@
     },
     {
         "type": "file",
+        "source": "../vm-keys/bastion-key.pub",
+        "destination": "/tmp/bastion-key.pub"
+    },
+    {
+        "type": "file",
         "source": "../vm-keys/fuzzvm-key.pub",
         "destination": "/tmp/fuzzvm-key.pub"
     },
