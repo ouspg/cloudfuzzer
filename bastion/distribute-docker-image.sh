@@ -1,9 +1,12 @@
 
 #!/bin/bash
 
-#usage: distribute-docker-image.sh <docker-image> <bastion> <fuzzvm1> <fuzzvm2> ...
+#
+#Loads list of nodes from $HOME/address_nodes and sends image from stdin to all nodes
+#
 
 #example: docker save <image> | ssh bastion "./distribute-docker-image.sh"
+
 
 echo "Saving image to bastion."
 
