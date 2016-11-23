@@ -11,7 +11,7 @@ set -o nounset
 sudo apt-get update;
 sudo apt-get install docker.io -y;
 
-sudo groupadd docker
+sudo groupadd -f docker
 sudo gpasswd -a ${USER} docker
 sudo service docker restart
 
