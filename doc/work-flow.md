@@ -4,15 +4,15 @@
 * packer build images on the cloud
 
 ## Work flow
-* docker build <image>
-* create-N-fuzzvm <user-defined>
-* create-1-bastion <user-defined>
-* ssh bastion "scripts/setup-swarm <nodes>"
-* docker save <img> | ssh bastion "scripts/distribute-docker-image.sh"
+* docker build &lt;image&gt;
+* create-N-fuzzvm &lt;user-defined&gt;
+* create-1-bastion &lt;user-defined&gt;
+* ssh bastion "scripts/setup-swarm &lt;nodes&gt;"
+* docker save &lt;img&gt; | ssh bastion "scripts/distribute-docker-image.sh"
 * ssh bastion "scripts/health.sh"
 * ssh bastion "scripts/fuzz.sh"
 * sleep 10000
-* get-results.sh <user-defined>
+* get-results.sh &lt;user-defined&gt;
 * ssh bastion "scripts/stop.sh"
 * exit
 

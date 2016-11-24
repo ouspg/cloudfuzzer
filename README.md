@@ -52,8 +52,8 @@ You must create
 
 ## Setting it up
 
-* ssh bastion "scripts/setup-swarm <nodes>"
-* docker save <img> | ssh bastion "scripts/distribute-docker-image.sh"
+* ssh bastion "scripts/setup-swarm &lt;nodes&gt;"
+* docker save &lt;img&gt; | ssh bastion "scripts/distribute-docker-image.sh"
 
 ## Images description
 
