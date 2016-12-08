@@ -90,4 +90,4 @@ Cloudfuzzer nodes are not supposed to be visible in public network. No TLS is us
 
 License
 ----
-MIT
+Apache 2.0
