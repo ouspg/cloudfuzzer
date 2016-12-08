@@ -30,4 +30,5 @@ mv /tmp/scripts $HOME/
 chmod +x $HOME/scripts/*
 
 sudo passwd ubuntu -l
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 
