@@ -2,3 +2,4 @@ vm-keys/
 packer/packer_cache
 packer/bastion-img
 packer/fuzzvm-img
+context/

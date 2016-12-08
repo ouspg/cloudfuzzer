@@ -7,4 +7,4 @@
 echo "Image name: $1"
 echo "Bastion: $2"
 
-docker save $1 | ssh ubuntu@$2 "~/scripts/distribute-docker-image.sh"
+docker save $1 | ssh ubuntu@$2 "/scripts/distribute-docker-image.sh"

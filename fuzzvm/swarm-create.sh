@@ -4,6 +4,7 @@
 
 #TODO: Investigate if there can be timing issues.
 
+echo $@ > $HOME/address_nodes
 
 MASTER_ADDRESS=$1
 shift;
