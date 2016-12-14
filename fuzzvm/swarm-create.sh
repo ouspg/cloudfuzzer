@@ -28,4 +28,15 @@ echo "Swarm setup completed. Waiting 10s for status update."
 #Print docker info
 sleep 10;
 
-docker -H :4000 info
+NODES=$(cat address_nodes | wc -w)
+
+WAITS=0;
+while (( $NODES != $(docker -H :4000 info | awk '$1 == "Nodes:" {print $2}') )); do 
+	echo "Nodes are not ready yet..."
+	let WAITS++;
+	if (( $WAITS == 6 )); then
+		echo "For some reason nodes haven't come up yet. Aborting."
+		exit;
+	fi
+	echo "Waiting another 10s."
+done
