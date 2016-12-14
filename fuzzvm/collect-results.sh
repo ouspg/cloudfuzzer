@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o errexit
+set -o nounset
+
 #Collects results to bastion.
 
 #Usage: bastion:~$ ssh $(cat address_master) "collect-results.sh" | tar x
@@ -10,6 +13,6 @@ for node in $NODE_ADDRESSES; do
 #	echo $node;
 	for container in $(docker -H $node:2375 ps -a | sed -e "1d" | awk  '$2 != "swarm" && $2 != "progrium/consul" {print $1}'); do
 #		echo $container;
-		docker -H $node:2375 cp $container:/results -;
+		docker -H $node:2375 cp $container:/results - | gzip;
 	done
 done
