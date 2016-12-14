@@ -39,4 +39,7 @@ while (( $NODES != $(docker -H :4000 info | awk '$1 == "Nodes:" {print $2}') ));
 		exit;
 	fi
 	echo "Waiting another 10s."
+	sleep 10;
 done
+
+echo "All nodes are online."
