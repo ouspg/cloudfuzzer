@@ -13,6 +13,9 @@
 
 ADDRESSES="$@"
 
+OWN_ADDRESS=$(hostname -I | awk '{print $1}')
+
+echo "Bastion: $OWN_ADDRESS"
 echo "FuzzVMs: $ADDRESSES"
 
 echo "Checking connection to all FuzzVMs."
@@ -35,7 +38,8 @@ SWARM_NODES=$@;
 
 echo $SWARM_MASTER > $HOME/address_master;
 echo $SWARM_MASTER $SWARM_NODES > $HOME/address_nodes;
+echo $OWN_ADDRESS > $HOME/address_bastion
 
 echo "Selected $SWARM_MASTER as swarm master"
 echo "Starting swarm-create.sh on swarm master"
-ssh $SWARM_MASTER "scripts/swarm-create.sh $SWARM_MASTER $SWARM_NODES";
+ssh $SWARM_MASTER "scripts/swarm-create.sh $OWN_ADDRESS $SWARM_MASTER $SWARM_NODES";

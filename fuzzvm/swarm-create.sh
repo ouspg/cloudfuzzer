@@ -4,6 +4,12 @@
 
 #TODO: Investigate if there can be timing issues.
 
+
+BASTION_ADDRESS=$1
+shift;
+
+echo $BASTION_ADDRESS > $HOME/address_bastion
+
 echo $@ > $HOME/address_nodes
 
 MASTER_ADDRESS=$1
@@ -22,6 +28,7 @@ echo "Setting up nodes."
 for node in $NODE_ADDRESSES; do
 	#Connect each swarm node and run node setup script.
 	ssh -o StrictHostKeyChecking=no $node "scripts/setup-node.sh $node $MASTER_ADDRESS";
+	scp -o StrictHostKeyChecking=no $HOME/address_bastion $node:;
 done
 
 echo "Swarm setup completed. Waiting 10s for status update."
