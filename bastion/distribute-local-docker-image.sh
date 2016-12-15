@@ -14,7 +14,7 @@ IMAGE="$1"
 for node in $(cat $HOME/address_nodes) 
 do
     echo "FuzzVM: $node"
-    cat $IMAGE | bzip2 | ssh $node "bunzip2 | docker load;";
+    cat $IMAGE | ssh $node "gunzip | docker load;";
 done
 
 echo "Removing image from bastion."
