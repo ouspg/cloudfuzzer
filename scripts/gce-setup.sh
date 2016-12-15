@@ -12,11 +12,13 @@ cd $DIR;
 packer build -only=gcloud -force -var-file=$PACKERENV $DIR/../packer/packer-bastion.json
 packer build -only=gcloud -force -var-file=$PACKERENV $DIR/../packer/packer-fuzzvm.json
 
+
+gcloud compute instances create fuzzvm-1 fuzzvm-2 fuzzvm-3 fuzzvm-4 fuzzvm-5\
+	--zone europe-west1-d --image=cloudfuzzer-fuzzvm --no-address
+
 gcloud compute instances create bastion \
     --zone europe-west1-d --image=cloudfuzzer-bastion
 
-gcloud compute instances create fuzzvm-1 \
-    fuzzvm-2 fuzzvm-3 fuzzvm-4 fuzzvm-5 --zone europe-west1-d --image=cloudfuzzer-fuzzvm --no-address
 
 echo "Waiting for the machines to spin up..."
 sleep 30;
@@ -30,19 +32,20 @@ eval $(ssh-agent)
 
 ssh-add ./vm-keys/bastion-key;
 
-ssh -o StrictHostKeyChecking=no ubuntu@$bastion	"scripts/setup-swarm.sh $fuzzvms"
+ssh -o StrictHostKeyChecking=no ubuntu@$bastion "scripts/setup-swarm.sh $fuzzvms"
 
 #Test context in ./context contains docker-image and docker-options files.
-bash scripts/send-docker-data.sh ubuntu@$bastion ./context/
+bash scripts/send-docker-data.sh ubuntu@$bastion ./context/;
 
-ssh -o StrictHostKeyChecking=no ubuntu@$bastion "scripts/run-containers.sh 5"
+ssh -o StrictHostKeyChecking=no ubuntu@$bastion "scripts/run-containers.sh 7";
 
-ssh -o StrictHostKeyChecking=no ubuntu@$bastion "scripts/collect-results.sh"
+rm -rf ./test-results/;
+mkdir -p ./test-results/;
 
-mkdir ./context/test/
+ssh -o StrictHostKeyChecking=no ubuntu@$bastion "scripts/collect-results.sh";
+rsync --force -r ubuntu@$bastion:results ./test-results;
+ls ./test-results/results
 
-rsync -r ubuntu@$bastion:results ./context/test
-
-ssh -o StrictHostKeyChecking=no ubuntu@$bastion "scripts/collect-samples.sh"
-
-rsync -r ubuntu@$bastion:samples ./context/test
+ssh -o StrictHostKeyChecking=no ubuntu@$bastion "scripts/collect-samples.sh";
+rsync --force -r ubuntu@$bastion:samples ./test-results;
+ls ./test-results/samples
