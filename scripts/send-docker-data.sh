@@ -21,5 +21,5 @@ set -o nounset
 BASTION=$1;
 DIRECTORY=$2;
 
-scp -Cr $2/* $1:
-ssh $BASTION 'scripts/distribute-local-docker-image.sh ./docker-image'
+scp -o StrictHostKeyChecking=no -Cr $2/* $1:
+ssh -o StrictHostKeyChecking=no $BASTION 'scripts/distribute-local-docker-image.sh ./docker-image'
