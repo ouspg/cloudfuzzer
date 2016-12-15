@@ -9,4 +9,5 @@ set -o nounset
 
 CONTAINER=$1
 
-docker diff $CONTAINER | awk '$1 == "A" && $2 ~ /samples/ {print $2}' | docker exec -i $CONTAINER tar -c -T - | gzip
+docker diff $CONTAINER | awk '$1 == "A" && $2 ~ /samples/ {print $2}' | sed 's/^.//' | docker exec -i $CONTAINER tar zcf - -T - || \
+docker cp $CONTAINER:/samples - | gzip;

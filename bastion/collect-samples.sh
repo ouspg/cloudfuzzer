@@ -3,4 +3,4 @@
 #Docker swarm manager address
 MASTER_ADDRESS=$(cat $HOME/address_master);
 
-ssh $MASTER_ADDRESS "scripts/collect-samples.sh" | tar -zx
+ssh $MASTER_ADDRESS "scripts/collect-samples.sh"
