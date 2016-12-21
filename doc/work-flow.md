@@ -20,7 +20,7 @@
 * rsync
 * no-overwrite
 * no delete sync
-###fuzzvm
+## fuzzvm
 * sync on terminate
 * sync time interval
 * clean local
