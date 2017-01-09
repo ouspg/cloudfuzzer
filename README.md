@@ -24,26 +24,31 @@ By default, packer files for bastion and fuzzvm use use_variables for account_fi
 
 After that you can build images with following commands (Google Cloud)
 
-bastion
+__Bastion__
 ```
 packer build -only=gcloud -var-file=/path/to/your/variables.json packer-bastion.json
 ```
 
-fuzzvm
+__Fuzzvm__
 ```
 packer build -only=gcloud -var-file=/path/to/your/variables.json packer-fuzzvm.json
 ```
+
+* If you want to use aws use -only=aws
+* You can use -force if you want Packer to rewrite existing images in cloud platform.
+* Using Google Compute Engine with Packer: https://www.packer.io/docs/builders/googlecompute.html
+
 ## Instances
 
 After creating images with packer you should setup running instances in cloud environment.
 * 1x bastion
 * Nx fuzzvm
 
+Bastion should have access public ip so it can be accessed from outside network while fuzzvm should only have internal network ip.
+
 ## Distributing docker image
 
-* If you want to use aws use -only=aws
-* You can use -force if you want Packer to rewrite existing images in cloud platform.
-* Using Google Compute Engine with Packer: https://www.packer.io/docs/builders/googlecompute.html
+
 
 # Requirements
 
