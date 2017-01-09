@@ -57,9 +57,15 @@ After creating images with packer you should setup running instances in cloud en
 
 Bastion should have access public ip so it can be accessed from outside network while fuzzvm should only have internal network ip.
 
+## Setting it up
+
+* ssh bastion "scripts/setup-swarm.sh &lt;nodes&gt;"
+
+List of ip addresses of nodes should be given as argument for setup-swarm.sh
+
 ## Distributing docker image
 
-
+docker save &lt;img&gt; | ssh bastion "scripts/distribute-docker-image.sh"
 
 # Requirements
 
