@@ -32,9 +32,9 @@ fuzzvm
 packer build -only=gcloud -var-file=/path/to/your/variables.json packer-fuzzvm.json
 ```
 
-If you want to use aws use -only=aws
-
-Using Google Compute Engine with Packer: https://www.packer.io/docs/builders/googlecompute.html
+* If you want to use aws use -only=aws
+* You can use -force if you want Packer to rewrite existing images in cloud platform.
+* Using Google Compute Engine with Packer: https://www.packer.io/docs/builders/googlecompute.html
 
 # Requirements:
 * [Packer](https://www.packer.io/) 0.11.0
