@@ -1,23 +1,14 @@
 # Cloudfuzzer
 
-Cloudfuzzer is a cloud fuzzing framework. This project is currently in early development stage. Purpose of cloudfuzzer is to make it possible to easily run automated fuzz-testing in cloud environment.
+Cloudfuzzer is a cloud fuzzing framework. Purpose of cloudfuzzer is to make it possible to easily run automated fuzz-testing in cloud environment.
 
-## Setup
+In cloud environment __bastion__ instance works as a SSH gateway between outside world and fuzzing cluster. It is used to deliver docker image from user to swarm machines. Bastion is also used for storing fuzzing results. __Fuzzvm__ instances consist of one __swarm-master__ and __N__ __swarm-nodes__. Swarm-master is used to set up docker-swarm, including all swarm-machine instances. It runs docker swarm discovery service and distributes fuzzing jobs, once received from Bastion. Swarm-nodes run fuzzing docker containers and sync results with bastion. Swarm-nodes can be run as Preemptible/SpotInstance instances because they have shutdown detection and they sync results before shutdown.
 
-### ssh-keys
+__Note:__ Cloudfuzzer nodes are not supposed to be visible in public network. No TLS is used in them and docker daemon can be accessed from network. They should be connected via bastion.
 
-Packer is used to provision ssh keys to the bastion and fuzzvm images.
+# Getting started
 
-By default keys should be named bastion-key, bastion-key.pub and fuzzvm-key, fuzzvm-key.pub and should locate in folder ./vm-keys.
-
-You can use ./scripts/create-keys.sh to create rsa 4096 keys for you.
-
-Keys are provisioned so that bastion can access all machines created from fuzzvm-image, and fuzzvm can access all other fuzzvms and bastion.
-(Currently there are no separate users for different operations, so you get full root access with these keys.)
-
-## Using Packer
-
-Using Google Compute Engine with Packer is documented in: https://www.packer.io/docs/builders/googlecompute.html
+Packer is used for creating images to cloud environment. You must build images for bastion and fuzzvm. You find the packer files from [packer/](packer/) directory.
 
 By default, packer files for bastion and fuzzvm use use_variables for account_file and project_id.
 
@@ -26,67 +17,28 @@ One way to use them is to make a separate json-file:
 {
     "account_file":	"/path/to/your/account_file.json",
     "project_id":	"your_cloudfuzzer_project_id"
-    "aws_access_key": "access_key",
-    "aws_secret_key": "secret_key"
 }
 ```
 
-and run Packer build with:
+After that you can build images with following commands (Google Cloud)
 
-Google Cloud
+bastion
 ```
 packer build -only=gcloud -var-file=/path/to/your/variables.json packer-bastion.json
 ```
 
-AWS
+fuzzvm
 ```
-packer build -only=aws -var-file=/path/to/your/variables.json packer-bastion.json
+packer build -only=gcloud -var-file=/path/to/your/variables.json packer-fuzzvm.json
 ```
 
-You can use -force if you want Packer to rewrite existing images in cloud platform.
+If you want to use aws use -only=aws
 
-You must create
-* N fuzzvm
-* 1 bastion
-
-
-## Setting it up
-
-* ssh bastion "scripts/setup-swarm &lt;nodes&gt;"
-* docker save &lt;img&gt; | ssh bastion "scripts/distribute-docker-image.sh"
-
-## Images description
-
-Bastion
-* Works as a SSH gateway between outside world and fuzzing cluster
-* Delivers docker image from user to swarm-machines
-* Stores results
-
-FuzzImage
-* Works as a golden image for docker swarm machines
-* Contains all required components to run as a docker swarm-master, or as a swarm-node
-* In initialization N swarm-machine instances are created from FuzzImage, one of them is selected as a swarm-master, by Bastion
-* Can be used in Google Compute Preemptible instances and Amazon Spot Instances.
-
-swarm-master:
-* Uses docker-machine to set up docker-swarm, including all swarm-machine instances
-* Runs docker swarm discovery service
-* Distributes fuzzing jobs, once received from Bastion
-
-swarm-node:
-* Runs fuzzing docker container(s)
-* Syncs results with Bastion
-* Time interval
-* Preemptible and SpotInstance shutdown detection
+Using Google Compute Engine with Packer: https://www.packer.io/docs/builders/googlecompute.html
 
 # Requirements:
 * [Packer](https://www.packer.io/) 0.11.0
 * Cloud service
-
-# Note
-
-Cloudfuzzer nodes are not supposed to be visible in public network. No TLS is used in them and docker daemon can be accessed from network. They should be connected via bastion.
-
 
 License
 ----
