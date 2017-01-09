@@ -14,4 +14,4 @@ IMAGE="default-image"
 
 cat > $IMAGE
 
-./distribute-local-docker-image.sh $IMAGE;
+/home/ubuntu/scripts/distribute-local-docker-image.sh $IMAGE;

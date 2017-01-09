@@ -65,7 +65,11 @@ List of ip addresses of nodes should be given as argument for setup-swarm.sh
 
 ## Distributing docker image
 
-docker save &lt;img&gt; | ssh bastion "scripts/distribute-docker-image.sh"
+docker save &lt;img&gt; | gzip | ssh bastion "scripts/distribute-docker-image.sh"
+
+## Run container
+
+..
 
 # Requirements
 
