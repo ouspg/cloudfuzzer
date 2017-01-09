@@ -10,6 +10,17 @@ __Note:__ Cloudfuzzer nodes are not supposed to be visible in public network. No
 
 # Getting started
 
+## ssh-keys
+
+Packer is used to provision ssh keys to the bastion and fuzzvm images.
+
+By default keys should be named bastion-key, bastion-key.pub and fuzzvm-key, fuzzvm-key.pub and should locate in folder ./vm-keys.
+
+You can use ./scripts/create-keys.sh to create rsa 4096 keys for you.
+
+Keys are provisioned so that bastion can access all machines created from fuzzvm-image, and fuzzvm can access all other fuzzvms and bastion.
+(Currently there are no separate users for different operations, so you get full root access with these keys.)
+
 ## Images
 
 Packer is used for creating images to cloud environment. You must build images for bastion and fuzzvm. You find the packer files from [packer/](packer/) directory.
