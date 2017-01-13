@@ -7,6 +7,7 @@ OWN_ADDRESS=$1;
 
 MASTER_ADDRESS=$2;
 
+BASTION_ADDRESS=$(cat $HOME/address_bastion);
 
 echo ""
 echo "Setting up new node:"
@@ -33,9 +34,10 @@ sudo systemctl daemon-reload;
 sudo systemctl restart docker;
 echo "Service restarted."
 
+#Run docker volume container rsync
+CID=$(docker run -d -p 10873:873 --volume /output -e VOLUME=/output -e ALLOW="$BASTION_ADDRESS" nabeken/docker-volume-container-rsync);
+
 #Note: We expect the discovery service to run at same machine as swarm master
 echo "Running swarm node container."
 docker run -d swarm join --advertise=$OWN_ADDRESS:2375 consul://$MASTER_ADDRESS:8500;
 echo "All done."
-
-

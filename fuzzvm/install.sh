@@ -18,6 +18,7 @@ sudo service docker restart
 sudo docker pull swarm;
 sudo docker pull ubuntu;
 sudo docker pull progrium/consul;
+sudo docker pull nabeken/docker-volume-container-rsync;
 
 mkdir -p $HOME/.ssh;
 mv /tmp/fuzzvm-key $HOME/.ssh/id_rsa
@@ -31,4 +32,3 @@ chmod +x $HOME/scripts/*
 
 sudo passwd ubuntu -l
 sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
-
