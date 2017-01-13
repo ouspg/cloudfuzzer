@@ -27,8 +27,8 @@ docker run -d -p 4000:4000 swarm manage -H :4000 --advertise $MASTER_ADDRESS:400
 echo "Setting up nodes."
 for node in $NODE_ADDRESSES; do
 	#Connect each swarm node and run node setup script.
-	ssh -o StrictHostKeyChecking=no $node "scripts/setup-node.sh $node $MASTER_ADDRESS";
 	scp -o StrictHostKeyChecking=no $HOME/address_bastion $node:;
+	ssh -o StrictHostKeyChecking=no $node "scripts/setup-node.sh $node $MASTER_ADDRESS";
 done
 
 echo "Swarm setup completed. Waiting 10s for status update."
@@ -38,7 +38,7 @@ sleep 10;
 NODES=$(cat address_nodes | wc -w)
 
 WAITS=0;
-while (( $NODES != $(docker -H :4000 info | awk '$1 == "Nodes:" {print $2}') )); do 
+while (( $NODES != $(docker -H :4000 info | awk '$1 == "Nodes:" {print $2}') )); do
 	echo "Nodes are not ready yet..."
 	let WAITS++;
 	if (( $WAITS == 6 )); then
