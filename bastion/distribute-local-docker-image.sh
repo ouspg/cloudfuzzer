@@ -1,5 +1,7 @@
-
 #!/bin/bash
+
+set -o errexit
+set -o nounset
 
 #
 #Sends docker image from bastion to swarm nodes. Removes image after sending.
@@ -7,6 +9,7 @@
 # 
 
 #Usage: ./distribute-local-docker-image.sh <image-file>
+
 
 IMAGE="$1"
 

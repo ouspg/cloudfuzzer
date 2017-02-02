@@ -1,5 +1,8 @@
 #!/bin/bash
+#!/bin/bash
 
+set -o errexit
+set -o nounset
 #Check all nodes connected to discovery
 
 #Todo: Need improvement

@@ -1,5 +1,7 @@
-
 #!/bin/bash
+
+set -o errexit
+set -o nounset
 
 #
 #Loads list of nodes from $HOME/address_nodes and sends image from stdin to all nodes

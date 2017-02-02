@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o errexit
+set -o nounset
+
 COUNT=$1
 
 MASTER_ADDRESS=$(cat $HOME/address_master)
