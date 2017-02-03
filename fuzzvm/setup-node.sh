@@ -35,7 +35,7 @@ sudo systemctl restart docker;
 echo "Service restarted."
 
 #Run docker volume container rsync
-CID=$(docker run -d -p 10873:873 --volume /output -e VOLUME=/output -e ALLOW="$BASTION_ADDRESS" nabeken/docker-volume-container-rsync);
+CID=$(docker run -d -p 10873:873 --name rsync-volume-container --volume /output -e VOLUME=/output -e ALLOW="$BASTION_ADDRESS" nabeken/docker-volume-container-rsync);
 echo $CID > $HOME/cid;
 
 #Note: We expect the discovery service to run at same machine as swarm master
