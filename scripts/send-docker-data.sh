@@ -12,12 +12,12 @@ set -o nounset
 #		docker-image
 #		docker-options
 
-#docker-image: 
-#	docker image saved with: docker save <image> > docker-image
+#docker-image:
+#	docker image saved with: docker save <image | gzip > docker-image
 
-#docker-run-options: 
-#	one liner docker run options. 
-#	Is used in swarm manager: docker run $(cat docker-options)
+#docker-options:
+#	one liner docker run options.
+#	Is used in swarm manager: docker run -d --volumes-from rsync-volume-container $(cat docker-options)
 BASTION=$1;
 DIRECTORY=$2;
 
