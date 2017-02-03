@@ -64,7 +64,7 @@ Bastion should have access public ip so it can be accessed from outside network 
 List of ip addresses of nodes should be given as argument for setup-swarm.sh
 
 ## Distributing docker image
-Save docker image to cloudfuzzer/context:
+Save docker image to cloudfuzzer/context and upload it:
 * docker save $image | gzip > docker-image
 * bash scripts/send-docker-data.sh ubuntu@$bastion ../context
 
