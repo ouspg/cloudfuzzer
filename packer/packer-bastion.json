@@ -90,7 +90,7 @@
     },
     {
         "type": "shell",
-        "script": "../bastion/install.sh"
+        "script": "provisioner-scripts/bastion-setup.sh"
     }]
 
 

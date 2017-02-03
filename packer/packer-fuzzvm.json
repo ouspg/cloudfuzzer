@@ -90,6 +90,6 @@
     },
     {
         "type": "shell",
-        "script": "../fuzzvm/install.sh"
+        "script": "provisioner-scripts/fuzzvm-setup.sh"
     }]
 }
