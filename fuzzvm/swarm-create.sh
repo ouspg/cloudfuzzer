@@ -23,9 +23,6 @@ for node in $NODE_ADDRESSES; do
 	ssh -o StrictHostKeyChecking=no $node "docker swarm join --token $WORKER_TOKEN $MASTER_ADDRESS:2377";
 done
 
-
-docker network create --opt encrypted --driver overlay rsync-network
-
 echo "Starting rsync-volume-containers."
 docker  service create --network rsync-network --mode global --publish mode=host,target=873,published=10873 --name rsync-volume-container \
 		--mount type=volume,source=rsync-volume-container,destination=/output   \
