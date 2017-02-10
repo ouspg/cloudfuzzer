@@ -51,34 +51,34 @@ esac
 function print_help () {
     case $1 in
     "check-internet")
-    echo "help check-internet"
+    echo "Run to check if the node is connected to Internet. There should be no Internet connection in fuzzing nodes (fuzzvm)."
     ;;
     "collect-results-from-remote")
-    echo "help collect-results-from-remote"
+    echo "Collects results to master. Used for debugging."
     ;;
     "collect-results")
-    echo "help collect-results"
+    echo "Collects results to bastion."
     ;;
     "collect-samples")
-    echo "help collect-samples"
+    echo "Collects results to bastion."
     ;;
     "get-samples-from-container")
-    echo "help get-samples-from-container"
+    echo "Collect diff of samples from container."
     ;;
     "remove-containers")
-    echo "help remove-containers"
+    echo "Remove the containers."
     ;;
     "run-containers")
-    echo "help run-containers"
+    echo "Run the containers."
     ;;
     "setup-node")
     echo "help setup-node"
     ;;
     "stop-containers")
-    echo "help stop-containers"
+    echo "Stop running containers."
     ;;
     "swarm-create")
-    echo "help swarm-create"
+    echo "Script for swarm master setup"
     ;;
     *)
     echo "Available commands:"
@@ -92,7 +92,7 @@ function print_help () {
     echo "setup-node"
     echo "stop-containers"
     echo "swarm-create"
-    echo "help (command)"
+    echo "help <command>"
     ;;
 esac
 }

@@ -44,35 +44,39 @@ esac
 function print_help () {
 case $1 in
     "setup-swarm")
-    echo "help setup-swarm"
+    echo "First checks connection to each FuzzVM and that ssh works without passwd."
+    echo "Selects first FuzzVM as swarm manager and triggers swarm-create on manager."
+    echo "Usage cloudfuzzer setup-swarm <fuzzvm1> <fuzzvm2> ..."
     ;;
     "stop-containers")
-    echo "help stop-containers"
+    echo "Stop all the running containers"
     ;;
     "run-containers")
-    echo "help run-containers"
+    echo "Run containers. Takes number of containers to be run as an argument."
     ;;
     "remove-containers")
-    echo "help remove-containers"
+    echo "Remove containers"
     ;;
     "distribute-docker-image")
-    echo "help distribute-docker-image"
+    echo "Loads list of nodes from $HOME/address_nodes and sends image from stdin to all nodes"
+    echo "example: docker save <image> | ssh bastion ./distribute-docker-image.sh"
     ;;
     "distribute-local-docker-image")
-    echo "help distribute-local-docker-image"
+    echo "Sends docker image from bastion to swarm nodes. Removes image after sending."
+    echo "Usage: cloudfuzzer distribute-local-docker-image.sh <image-file>"
     ;;
     "collect-samples")
-    echo "help collect-samples"
+    echo "Collect samples"
     ;;
     "collect-results")
-    echo "help collect-results"
+    echo "Collect-results"
     ;;
     "collect-results-rsync")
-    echo "help collect-results-rsync"
+    echo "Collect results using rsync"
     ;;
     *)
     echo "Available commands:"
-    echo "setup-swarm (addresses ...)"
+    echo "setup-swarm <fuzzvm1> <fuzzvm2> ..."
     echo "stop-containers"
     echo "run-containers"
     echo "remove-containers"
@@ -81,7 +85,7 @@ case $1 in
     echo "collect-samples"
     echo "collect-results"
     echo "collect-results-rsync"
-    echo "help (command)"
+    echo "help <command>"
     ;;
 esac
 }

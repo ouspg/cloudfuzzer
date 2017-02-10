@@ -34,15 +34,15 @@ case $1 in
     "send-docker-data")
     echo "Send docker data to cloud. Bastion address must be given as first argument. Second argument is context directory."
     echo "context directory must contain two files: docker-image and docker-image."
-    echo "docker save (image) | gzip > docker-image"
+    echo "docker save <image> | gzip > docker-image"
     echo "docker-options file must contain docker options"
     ;;
     *)
     echo "Available commands:"
     echo "create-keys"
-    echo "gce-setup (packerenv)"
-    echo "send-docker-data (bastion-address) (directory)"
-    echo "help (command)"
+    echo "gce-setup <packerenv>"
+    echo "send-docker-data <bastion-address> <directory>"
+    echo "help <command>"
     ;;
 esac
 }
