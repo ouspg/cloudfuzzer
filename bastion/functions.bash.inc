@@ -31,10 +31,10 @@ collect-samples () {
 "$DIR/collect-samples.sh"
 }
 
-collect-results {
+collect-results () {
 "$DIR/collect-results.sh"
 }
 
-collect-results-rsync {
+collect-results-rsync () {
 "$DIR/collect-results-rsync.sh"
 }
