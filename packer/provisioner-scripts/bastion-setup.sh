@@ -6,6 +6,8 @@ set -o nounset
 ##
 ##Bastion install script.
 ##
+sudo apt-get update;
+sudo apt-get upgrade -y;
 
 mkdir -p $HOME/.ssh;
 mv /tmp/bastion-key $HOME/.ssh/id_rsa

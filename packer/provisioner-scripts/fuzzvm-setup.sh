@@ -9,16 +9,22 @@ set -o nounset
 ##Note: This script is for Ubuntu 16.04
 
 sudo apt-get update;
+sudo apt-get upgrade -y;
 sudo apt-get install docker.io -y;
 
 sudo groupadd -f docker
 sudo gpasswd -a ${USER} docker
-sudo service docker restart
 
-sudo docker pull swarm;
-sudo docker pull ubuntu;
-sudo docker pull progrium/consul;
+sudo systemctl restart docker;
+
 sudo docker pull nabeken/docker-volume-container-rsync;
+
+sudo systemctl stop docker;
+
+#Remove docker key.json. This forces docker to regenerate
+#ID when the fuzzvm is started, otherwise multiple daemons
+#with same ID will cause conflict in docker swarm. 
+sudo rm /etc/docker/key.json
 
 mkdir -p $HOME/.ssh;
 mv /tmp/fuzzvm-key $HOME/.ssh/id_rsa
