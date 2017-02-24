@@ -5,7 +5,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 source $DIR/../cloudfuzzer.conf
 source $DIR/../user.conf
-## ADD CHECK TO user.conf
+## ADD CHECK TO user.conf, cloudfuzzer.conf exists
 
 cloudfuzzer () {
 case $1 in
