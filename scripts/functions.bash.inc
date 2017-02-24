@@ -5,6 +5,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
 source $DIR/../cloudfuzzer.conf
 source $DIR/../user.conf
+## ADD CHECK TO user.conf
 
 cloudfuzzer () {
 case $1 in
@@ -16,7 +17,6 @@ case $1 in
     "$DIR/create-keys.sh"
     fi
     ;;
-    "gce-setup")
     "create-keys")
     if [ $2 = "help" ]
     then
