@@ -42,6 +42,8 @@ echo $SWARM_MASTER > $HOME/address_master;
 echo $SWARM_MASTER $SWARM_NODES > $HOME/address_nodes;
 echo $OWN_ADDRESS > $HOME/address_bastion
 
+scp $HOME/address_* $SWARM_MASTER:
+
 echo "Selected $SWARM_MASTER as swarm master"
 echo "Starting swarm-create.sh on swarm master"
-ssh $SWARM_MASTER "scripts/swarm-create.sh $OWN_ADDRESS $SWARM_MASTER $SWARM_NODES";
+ssh $SWARM_MASTER "scripts/swarm-create.sh";
