@@ -4,3 +4,4 @@ packer/bastion-img
 packer/fuzzvm-img
 context/
 test-results/
+user.conf
