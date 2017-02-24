@@ -1,10 +1,9 @@
 #!/bin/bash
 
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+export CLOUDFUZZER_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
-CLOUDFUZZER_CONF="$DIR/../cloudfuzzer.conf"
-USER_CONF="$DIR/../user.conf"
+CLOUDFUZZER_CONF="$CLOUDFUZZER_DIR/cloudfuzzer.conf"
+USER_CONF="$CLOUDFUZZER_DIR/user.conf"
 
 if [ -f $CLOUDFUZZER_CONF ]
 then
@@ -17,42 +16,31 @@ fi
 if [ -f $USER_CONF ]
 then
 	source $USER_CONF
-else
-	echo "ERROR: $USER_CONF not found. Aborted."
-	return 1
 fi
 
 cloudfuzzer () {
 case $1 in
     "create-keys")
-    if [ $2 = "help" ]
+    if [ "$2" == "help" ]
     then
         echo "Create keys in vm-keys folder to be used in bastion and fuzzvm. If keys already exist no kew keys are created."
     else
-    "$DIR/create-keys.sh"
-    fi
-    ;;
-    "create-keys")
-    if [ $2 = "help" ]
-    then
-        echo "Create keys in vm-keys folder to be used in bastion and fuzzvm. If keys already exist no kew keys are created."
-    else
-    "$DIR/gce-setup.sh" ${@:2}
+    "$CLOUDFUZZER_DIR/scripts/create-keys.sh"
     fi
     ;;
     "send-docker-data")
-    if [ $2 = "help" ]
+    if [ "$2" == "help" ]
     then
         echo "Send docker data to cloud. Bastion address must be given as first argument. Second argument is context directory."
         echo "context directory must contain two files: docker-image and docker-image."
         echo "docker save <image> | gzip > docker-image"
         echo "docker-options file must contain docker options"
     else
-    "$DIR/send-docker-data.sh" ${@:2}
+    "$CLOUDFUZZER_DIR/scripts/send-docker-data.sh" ${@:2}
     fi
     ;;
     "bastion")
-    ssh $SSH_OPTS $BASTION_USER@$BASTION "/home/ubuntu/scripts/helpers.sh ${@:2}"
+    ssh $SSH_OPTS $BASTION_USER@$BASTION "scripts/helpers.sh ${@:2}"
     ;;
     "help")
 	echo "Available commands:"
