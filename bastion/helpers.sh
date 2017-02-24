@@ -36,7 +36,7 @@ case $1 in
     print_help $2
     ;;
     *)
-    echo "Command not found."
+    echo "Unknown argument."
     ;;
 esac
 }
@@ -89,3 +89,5 @@ case $1 in
     ;;
 esac
 }
+
+cloudfuzzer $@

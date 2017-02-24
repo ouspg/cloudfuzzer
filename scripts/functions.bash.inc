@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BASTION=130.211.51.217
+
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 
@@ -14,11 +16,14 @@ case $1 in
     "send-docker-data")
     "$DIR/send-docker-data.sh" ${@:2}
     ;;
+    "bastion")
+    ssh ubuntu@$BASTION "${@:2}" 
+    ;;
     "help")
     print_help $2
     ;;
     *)
-    echo "Command not found."
+    echo "Unknown argument."
     ;;
 esac
 }
