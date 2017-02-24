@@ -5,3 +5,4 @@ packer/fuzzvm-img
 context/
 test-results/
 user.conf
+cloudfuzzer.conf
