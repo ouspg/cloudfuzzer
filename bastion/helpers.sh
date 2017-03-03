@@ -76,16 +76,16 @@ case $1 in
     ;;
     *)
         echo "Available commands:"
-        echo "    setup-swarm <fuzzvm1> <fuzzvm2> ..."
-        echo "    stop-containers"
-        echo "    run-containers"
-        echo "    remove-containers"
+        echo "    collect-results-rsync"
+        echo "    collect-results"
+        echo "    collect-samples"
         echo "    distribute-docker-image"
         echo "    distribute-local-docker-image"
-        echo "    collect-samples"
-        echo "    collect-results"
-        echo "    collect-results-rsync"
         echo "    help <command>"
+        echo "    remove-containers"
+        echo "    run-containers"
+        echo "    setup-swarm <fuzzvm1> <fuzzvm2> ..."
+        echo "    stop-containers"
     ;;
 esac
 }
