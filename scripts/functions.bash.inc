@@ -19,39 +19,55 @@ then
 fi
 
 cloudfuzzer () {
-case $1 in
-    "create-keys")
-    if [ "$2" == "help" ]
-    then
-        echo "Create keys in vm-keys folder to be used in bastion and fuzzvm. If keys already exist no kew keys are created."
-    else
-    "$CLOUDFUZZER_DIR/scripts/create-keys.sh"
-    fi
-    ;;
-    "send-docker-data")
-    if [ "$2" == "help" ]
-    then
-        echo "Send docker data to cloud. Bastion address must be given as first argument. Second argument is context directory."
-        echo "context directory must contain two files: docker-image and docker-image."
-        echo "docker save <image> | gzip > docker-image"
-        echo "docker-options file must contain docker options"
-    else
-    "$CLOUDFUZZER_DIR/scripts/send-docker-data.sh" ${@:2}
-    fi
-    ;;
-    "bastion")
-    ssh $SSH_OPTS $BASTION_USER@$BASTION "scripts/helpers.sh ${@:2}"
-    ;;
-    "help")
-	echo "Available commands:"
-    echo "create-keys"
-    echo "gce-setup <packerenv>"
-    echo "send-docker-data <bastion-address> <directory>"
-    echo "bastion <command>"
-    echo "help <command>"
-    ;;
-    *)
-    echo "Unknown argument."
-    ;;
-esac
+    case $1 in
+        "create-keys")
+            if [ "$2" == "help" ]; then
+                echo "Create keys in vm-keys folder to be used in bastion and fuzzvm. If keys already exist no kew keys are created."
+            else
+                "$CLOUDFUZZER_DIR/scripts/create-keys.sh"
+            fi
+        ;;
+        "send-docker-data")
+            if [ "$2" == "help" ]; then
+                echo "Send docker data directory to bastion."
+                echo "Usage: cloudfuzzer send-docker-data <path-to-docker-data-directory>"
+                echo "Directory must contain two files: docker-image and docker-arguments."
+                echo "docker-image: docker save <image> | gzip > docker-image"
+                echo "docker-arguments: file must contain docker run arguments: docker run <arguments>"
+            else
+                "$CLOUDFUZZER_DIR/scripts/send-docker-data.sh" ${@:2}
+            fi
+        ;;
+        "bastion")
+        if [ -z $BASTION_ADDRESS ]; then
+            echo "BASTION_ADDRESS not set."
+            return 1
+        elif [ -z $BASTION_USER ]; then
+            echo "BASTION_USER not set."
+            return 1
+        fi
+            ssh $SSH_OPTS $BASTION_USER@$BASTION_ADDRESS "scripts/helpers.sh ${@:2}"
+        ;;
+        "ssh")
+        if [ -z $BASTION_ADDRESS ]; then
+            echo "BASTION_ADDRESS not set."
+            return 1
+        elif [ -z $BASTION_USER ]; then
+            echo "BASTION_USER not set."
+            return 1
+        fi
+            ssh $SSH_OPTS $BASTION_USER@$BASTION_ADDRESS    
+        ;;
+        "help")
+        	echo "Available commands:"
+            echo "  bastion <command> - run <command> on bastion."
+            echo "  create-keys - create new vm-keys"
+            echo "  help - print this"
+            echo "  send-docker-data <directory> - send docker data directory to bastion"
+            echo "  ssh - ssh to bastion"
+        ;;
+        *)
+            echo "  Unknown argument."
+        ;;
+    esac
 }
