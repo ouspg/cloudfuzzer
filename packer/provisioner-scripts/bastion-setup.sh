@@ -20,3 +20,4 @@ mv /tmp/scripts $HOME/
 sudo passwd ubuntu -l
 sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 
+echo 'source $HOME/scripts/helpers.sh' >> $HOME/.bashrc
