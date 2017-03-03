@@ -32,7 +32,7 @@ case $1 in
     "collect-results-rsync")
         "$DIR/collect-results-rsync.sh"
     ;;
-    "help")
+    "help" | "")
     print_help $2
     ;;
     *)
