@@ -11,8 +11,8 @@ set -o nounset
 sudo apt-get update;
 sudo apt-get upgrade -y;
 #sudo apt-get install docker.io -y;
-wget https://apt.dockerproject.org/repo/pool/main/d/docker-engine/docker-engine_1.13.1-0~ubuntu-xenial_amd64.deb && \
-sudo dpkg  --install docker-engine_1.13.1-0~ubuntu-xenial_amd64.deb && rm docker-engine_1.13.1-0~ubuntu-xenial_amd64.deb
+wget https://apt.dockerproject.org/repo/pool/main/d/docker-engine/docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb && \
+sudo dpkg  --install docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb && rm docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb
 sudo apt-get -f install -y 
 sudo groupadd -f docker
 sudo gpasswd -a ${USER} docker
