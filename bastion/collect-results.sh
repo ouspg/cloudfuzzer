@@ -3,7 +3,8 @@
 set -o errexit
 set -o nounset
 
-#Docker swarm manager address
-MASTER_ADDRESS=$(cat $HOME/address_master);
+NODES=$(cat $HOME/address_nodes)
 
-ssh $MASTER_ADDRESS "scripts/collect-results.sh" 
+for node in $NODES; do 
+	rsync -auP  rsync://$node:10873/volume/ results/
+done

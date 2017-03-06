@@ -4,16 +4,21 @@ set -o errexit
 set -o nounset
 
 #
-#Loads list of nodes from $HOME/address_nodes and sends image from stdin to all nodes
+#Sends docker image from bastion to swarm nodes. Removes image after sending.
 #
+# 
 
-#example: docker save <image> | ssh bastion "./distribute-docker-image.sh"
+#Usage: ./distribute-local-docker-image.sh <image-file>
 
 
-echo "Saving image to bastion."
+IMAGE="$1"
 
-IMAGE="default-image"
 
-cat > $IMAGE
+for node in $(cat $HOME/address_nodes) 
+do
+    echo "FuzzVM: $node"
+    cat $IMAGE | ssh $node "gunzip | docker load;";
+done
 
-/home/ubuntu/scripts/distribute-local-docker-image.sh $IMAGE;
+echo "Removing image from bastion."
+rm $IMAGE;
