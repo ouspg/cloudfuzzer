@@ -23,6 +23,13 @@ case $1 in
     "collect-results")
         "$DIR/collect-results.sh"
     ;;
+    "ssh-to-master")
+        if [ -z "$PS1" ]; then
+            echo "This command can only be used with interative shell"
+        else
+            ssh $(cat $HOME/address_master)
+        fi
+    ;;
     "help" | "")
     print_help $2
     ;;
@@ -55,6 +62,9 @@ case $1 in
     "collect-results")
         echo "Collect-results"
     ;;
+    "ssh-to-master")
+        echo "ssh to fuzzvm swarm master"
+    ;;
     *)
         echo "Available commands:"
         echo "    collect-results"
@@ -64,6 +74,9 @@ case $1 in
         echo "    run-containers"
         echo "    setup-swarm <fuzzvm1> <fuzzvm2> ..."
         echo "    stop-containers"
+        if [ ! -z "$PS1" ]; then
+            echo "    ssh-to-master"
+        fi
     ;;
 esac
 }
