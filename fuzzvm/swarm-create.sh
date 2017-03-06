@@ -24,7 +24,7 @@ for node in $NODE_ADDRESSES; do
 done
 
 echo "Starting rsync-volume-containers."
-docker  service create --network rsync-network --mode global --publish mode=host,target=873,published=10873 --name rsync-volume-container \
+docker  service create --mode global --publish mode=host,target=873,published=10873 --name rsync-volume-container \
 		--mount type=volume,source=rsync-volume-container,destination=/output   \
 		-e VOLUME=/output -e ALLOW="$BASTION_ADDRESS" nabeken/docker-volume-container-rsync;
 
