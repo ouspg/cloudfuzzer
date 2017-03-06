@@ -20,15 +20,18 @@ fi
 
 if [ -z $BASTION_ADDRESS ]; then
     echo "BASTION_ADDRESS not set."
-    echo "If you have it, set it to $CLOUDFUZZER_CONF or $USER_CONF"
-    echo "Or later use: export BASTION_ADDRESS=<bastion-address>, to set it"
+    echo "You have to set it, fefore running using send-docker-data, or any cloudfuzzer bastion <command>"
+    echo "You can set it to $CLOUDFUZZER_CONF or $USER_CONF, and rerun source command."
+    echo "Or later use: export BASTION_ADDRESS=<bastion-address>"
 else
     export BASTION_ADDRESS=$BASTION_ADDRESS
 fi
 
 if [ -z $BASTION_USER ]; then
     echo "BASTION_USER not set."
-    echo "Use: export BASTION_USER=<username>, to set it"
+    echo "You have to set it, fefore running using send-docker-data, or any cloudfuzzer bastion <command>"
+    echo "You can set it to $CLOUDFUZZER_CONF or $USER_CONF, and rerun source command."
+    echo "Or later use: export BASTION_USER=<username>, to set it"
 else
     export BASTION_USER=$BASTION_USER
 fi
