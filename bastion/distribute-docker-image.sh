@@ -8,7 +8,7 @@ set -o nounset
 #
 # 
 
-#Usage: ./distribute-local-docker-image.sh <image-file>
+#Usage: ./distribute-docker-image.sh <image-file>
 
 
 IMAGE="$1"
