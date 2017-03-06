@@ -3,6 +3,8 @@
 set -o errexit
 set -o nounset
 
+source $CLOUDFUZZER_DIR/scripts/functions.bash.inc
+
 #Usage: bash send-docker-data.sh <directory-with-docker-data>
 #Example: bash send-docker-data.sh ./fuzz-data
 
@@ -38,5 +40,5 @@ elif [ ! -f "$DIRECTORY/docker-image" ]; then
 	return 1
 fi
 
-scp -o StrictHostKeyChecking=no -o User=$BASTION_USER -Cr $2/* $BASTION_ADDRESS:
-ssh -o StrictHostKeyChecking=no -o User=$BASTION_USER $BASTION_ADDRESS 'scripts/helpers.sh distribute-local-docker-image ./docker-image'
+scp -o StrictHostKeyChecking=no -o User=$BASTION_USER -Cr $DIRECTORY/* $BASTION_ADDRESS:
+ssh -o StrictHostKeyChecking=no -o User=$BASTION_USER $BASTION_ADDRESS 'scripts/helpers.sh distribute-docker-image ./docker-image'
