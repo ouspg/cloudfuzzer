@@ -20,8 +20,11 @@ case $1 in
     "distribute-docker-image")
         "$DIR/distribute-docker-image.sh" $2
     ;;
-    "collect-results")
-        "$DIR/collect-results.sh"
+    "get-results")
+        "$DIR/get-results.sh"
+    ;;
+    "get-stats")
+        "$DIR/get-stats.sh"
     ;;
     "ssh-to-master")
         if [ -z "$PS1" ]; then
@@ -48,27 +51,32 @@ case $1 in
     ;;
     "stop-containers")
         echo "Stop all the running containers"
+        echo "TODO"
     ;;
     "run-containers")
         echo "Run containers. Takes number of containers to be run as an argument."
     ;;
     "remove-containers")
         echo "Remove containers"
+        echo "TODO"
     ;;
     "distribute-docker-image")
         echo "Sends docker image from bastion to swarm nodes. Removes image after sending."
         echo "Usage: cloudfuzzer distribute-local-docker-image.sh <image-file>"
     ;;
-    "collect-results")
-        echo "Collect-results"
+    "get-results")
+        echo "Get results from fuzzvms"
+    ;;
+    "get-stats")
+        echo "Get stats from master fuzzvm"
     ;;
     "ssh-to-master")
         echo "ssh to fuzzvm swarm master"
     ;;
     *)
         echo "Available commands:"
-        echo "    collect-results"
-        echo "    collect-samples"
+        echo "    get-results"
+        echo "    get-stats"
         echo "    distribute-docker-image"
         echo "    remove-containers"
         echo "    run-containers"

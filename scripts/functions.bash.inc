@@ -36,6 +36,17 @@ else
     export BASTION_USER=$BASTION_USER
 fi
 
+is_bastion_env_set (){
+    if [ -z $BASTION_ADDRESS ]; then
+        echo "BASTION_ADDRESS not set."
+        return 1
+    elif [ -z $BASTION_USER ]; then
+        echo "BASTION_USER not set."
+        return 1
+    fi
+    return 0
+}
+
 cloudfuzzer () {
     case $1 in
         "create-keys")
@@ -53,33 +64,47 @@ cloudfuzzer () {
                 echo "docker-image: docker save <image> | gzip > docker-image"
                 echo "docker-arguments: file must contain docker run arguments: docker run <arguments>"
             else
-                "$CLOUDFUZZER_DIR/scripts/send-docker-data.sh" ${@:2}
+                $CLOUDFUZZER_DIR/scripts/send-docker-data.sh ${@:2}
             fi
         ;;
         "bastion")
-        if [ -z $BASTION_ADDRESS ]; then
-            echo "BASTION_ADDRESS not set."
-            return 1
-        elif [ -z $BASTION_USER ]; then
-            echo "BASTION_USER not set."
-            return 1
-        fi
+            is_bastion_env_set || return 1;
             ssh $SSH_OPTS $BASTION_USER@$BASTION_ADDRESS "scripts/helpers.sh ${@:2}"
         ;;
         "ssh")
-        if [ -z $BASTION_ADDRESS ]; then
-            echo "BASTION_ADDRESS not set."
-            return 1
-        elif [ -z $BASTION_USER ]; then
-            echo "BASTION_USER not set."
-            return 1
-        fi
-            ssh $SSH_OPTS $BASTION_USER@$BASTION_ADDRESS    
+            if [ "$2" == "help" ]; then
+                echo "ssh to bastion"
+            else
+                is_bastion_env_set || return 1;
+                ssh $SSH_OPTS $BASTION_USER@$BASTION_ADDRESS    
+            fi
+        ;;
+        "get-results")
+            if [ "$2" == "help" ]; then
+                echo "Get results from cloudfuzzer"
+                echo "Usage: cloudfuzzer get-results <destination-directory>"
+            else
+                is_bastion_env_set || return 1;
+                cloudfuzzer bastion get-results
+                $CLOUDFUZZER_DIR/scripts/get-directory.sh results $2
+            fi
+        ;;
+        "get-stats")
+            if [ "$2" == "help" ]; then
+                echo "Get status and logs from cloudfuzzer"
+                echo "Usage: cloudfuzzer get-stats <destination-directory>"
+            else
+                is_bastion_env_set || return 1;
+                cloudfuzzer bastion get-stats
+                $CLOUDFUZZER_DIR/scripts/get-directory.sh stats $2
+            fi
         ;;
         "help")
         	echo "Available commands:"
             echo "  bastion <command> - run <command> on bastion."
             echo "  create-keys - create new vm-keys"
+            echo "  get-results - get results from cloudfuzzer"
+            echo "  get-stats - get various stats and logs from cloudfuzzer fuzzvm docker"
             echo "  help - print this"
             echo "  send-docker-data <directory> - send docker data directory to bastion"
             echo "  ssh - ssh to bastion"
