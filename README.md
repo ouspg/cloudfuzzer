@@ -29,7 +29,7 @@ Use following command to source cloudfuzzer functions
 source scripts/functions.bash.inc
 ```
 
-Available commands:
+Available commands (usage: cloudfuzzer <command>):
 ```
 bastion <command> - run <command> on bastion.
 create-keys - create new vm-keys
@@ -38,6 +38,11 @@ get-stats - get various stats and logs from cloudfuzzer fuzzvm docker
 help - print this
 send-docker-data <directory> - send docker data directory to bastion
 ssh - ssh to bastion
+```
+
+To get help for specific command type
+```
+cloudfuzzer <command> help
 ```
 
 ## ssh-keys
