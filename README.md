@@ -14,12 +14,12 @@ __Note:__ Cloudfuzzer nodes are not supposed to be visible in public network. No
 
 Config file of cloudfuzzer is named cloudfuzzer.conf
 user.conf overrides cloudfuzzer.conf.
-
+```
 Following variables are used:
 BASTION bastion address
 SSH_OPTS ssh options
 BASTION_USER bastion username
-
+```
 ## cloudfuzzer
 
 Use following command to source cloudfuzzer functions
@@ -80,7 +80,9 @@ Bastion should have access public ip so it can be accessed from outside network 
 
 ## Setting it up
 
-* cloudfuzzer bastion setup-swarm &lt;nodes&gt;"
+```
+cloudfuzzer bastion setup-swarm &lt;nodes&gt;"
+```
 
 List of ip addresses of nodes should be given as argument for setup-swarm.sh
 
