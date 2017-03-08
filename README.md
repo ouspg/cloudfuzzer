@@ -29,7 +29,7 @@ Use following command to source cloudfuzzer functions
 source scripts/functions.bash.inc
 ```
 
-Available commands (usage: cloudfuzzer <command>):
+Available commands (usage: cloudfuzzer &lt;command&gt;):
 ```
 bastion <command> - run <command> on bastion.
 create-keys - create new vm-keys
