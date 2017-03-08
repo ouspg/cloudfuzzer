@@ -126,7 +126,7 @@ cloudfuzzer bastion get-stats
 Stop containers
 
 ```
-cloudfuzzer bastion run-containers <count>
+cloudfuzzer bastion stop-containers
 ```
 
 # Requirements
