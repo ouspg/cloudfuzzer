@@ -79,7 +79,7 @@ case $1 in
         echo "    get-stats"
         echo "    distribute-docker-image"
         echo "    remove-containers"
-        echo "    run-containers"
+        echo "    run-containers <count>"
         echo "    setup-swarm <fuzzvm1> <fuzzvm2> ..."
         echo "    stop-containers"
         if [ ! -z "$PS1" ]; then

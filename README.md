@@ -10,13 +10,34 @@ __Note:__ Cloudfuzzer nodes are not supposed to be visible in public network. No
 
 # Getting started
 
+## config files
+
+Config file of cloudfuzzer is named cloudfuzzer.conf
+user.conf overrides cloudfuzzer.conf.
+
+Following variables are used:
+BASTION bastion address
+SSH_OPTS ssh options
+BASTION_USER bastion username
+
+## cloudfuzzer
+
+Use following command to source cloudfuzzer functions
+```
+source scripts/functions.bash.inc
+```
+
 ## ssh-keys
 
 Packer is used to provision ssh keys to the bastion and fuzzvm images.
 
 By default keys should be named bastion-key, bastion-key.pub and fuzzvm-key, fuzzvm-key.pub and should locate in folder ./vm-keys.
 
-You can use ./scripts/create-keys.sh to create rsa 4096 keys for you.
+You can use following command to create rsa 4096 keys for you.
+
+```
+cloudfuzzer create-keys
+```
 
 Keys are provisioned so that bastion can access all machines created from fuzzvm-image, and fuzzvm can access all other fuzzvms and bastion.
 (Currently there are no separate users for different operations, so you get full root access with these keys.)
@@ -59,18 +80,36 @@ Bastion should have access public ip so it can be accessed from outside network 
 
 ## Setting it up
 
-* ssh bastion "scripts/setup-swarm.sh &lt;nodes&gt;"
+* cloudfuzzer bastion setup-swarm &lt;nodes&gt;"
 
 List of ip addresses of nodes should be given as argument for setup-swarm.sh
 
 ## Distributing docker image
-Save docker image to cloudfuzzer/context and upload it:
-* docker save $image | gzip > docker-image
-* bash scripts/send-docker-data.sh ubuntu@$bastion ../context
 
-## Run container
+Save docker image to cloudfuzzer/context :
+```
+docker save $image | gzip > cloudfuzzer/context/docker-image
+```
+Upload it:
+```
+* send-docker-data cloudfuzzer/context
+```
 
-..
+## Run containers
+
+Run number of containers
+
+```
+cloudfuzzer bastion run-containers <count>
+```
+
+## Stop containers
+
+Stop containers
+
+```
+cloudfuzzer bastion run-containers <count>
+```
 
 # Requirements
 
