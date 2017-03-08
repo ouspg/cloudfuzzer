@@ -4,11 +4,13 @@ Cloudfuzzer is a cloud fuzzing framework. Purpose of cloudfuzzer is to make it p
 
 In cloud environment __bastion__ instance works as a SSH gateway between outside world and fuzzing cluster. It is used to deliver docker image from user to swarm machines. Bastion is also used for storing fuzzing results.
 
-__Fuzzvm__ instances consist of __one__ __swarm-master__ and __N__ __swarm-nodes__. Swarm-master is used to set up docker-swarm, including all swarm-machine instances. It runs docker swarm discovery service and distributes fuzzing jobs, once received from Bastion. Swarm-nodes run fuzzing docker containers and sync results with bastion. Swarm-nodes can be run as Preemptible/SpotInstance instances because they have shutdown detection and they sync results before shutdown.
-
-__Note:__ Cloudfuzzer nodes are not supposed to be visible in public network. No TLS is used in them and docker daemon can be accessed from network. They should be connected via bastion.
+__Fuzzvm__ instances consist of __one__ __swarm-master__ and __N__ __swarm-nodes__. Swarm-master is used to set up docker-swarm, including all swarm-machine instances. It distributes fuzzing jobs, once received from Bastion. Swarm-nodes run fuzzing docker containers and sync results with bastion. Swarm-nodes can be run as Preemptible/SpotInstance instances because they have shutdown detection and they sync results before shutdown.
 
 # Getting started
+
+## Example script for GCE
+
+Example script for setup in GCE is found in [tests/gce-tests/gce-setup.sh](tests/gce-tests/gce-setup.sh)
 
 ## config files
 
@@ -25,6 +27,17 @@ BASTION_USER bastion username
 Use following command to source cloudfuzzer functions
 ```
 source scripts/functions.bash.inc
+```
+
+Available commands:
+```
+bastion <command> - run <command> on bastion.
+create-keys - create new vm-keys
+get-results - get results from cloudfuzzer
+get-stats - get various stats and logs from cloudfuzzer fuzzvm docker
+help - print this
+send-docker-data <directory> - send docker data directory to bastion
+ssh - ssh to bastion
 ```
 
 ## ssh-keys
