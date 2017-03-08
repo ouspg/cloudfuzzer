@@ -110,6 +110,13 @@ Save docker image to cloudfuzzer/context :
 ```
 docker save $image | gzip > cloudfuzzer/context/docker-image
 ```
+
+Docker arguments should be defined in context/docker-options  
+Example:
+```
+ -d -m 3g volume_container_rsync
+```
+
 Upload it:
 ```
 send-docker-data cloudfuzzer/context
@@ -139,13 +146,6 @@ Get stats
 cloudfuzzer bastion get-stats
 ```
 
-## Stop containers
-
-Stop containers
-
-```
-cloudfuzzer bastion stop-containers
-```
 
 # Requirements
 
