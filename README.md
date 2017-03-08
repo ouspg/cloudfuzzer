@@ -117,7 +117,7 @@ Example:
  -d -m 3g volume_container_rsync
 ```
 
-Upload it:
+Upload context:
 ```
 send-docker-data cloudfuzzer/context
 ```
