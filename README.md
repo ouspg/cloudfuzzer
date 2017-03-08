@@ -99,7 +99,7 @@ Bastion should have access public ip so it can be accessed from outside network 
 ## Setting it up
 
 ```
-cloudfuzzer bastion setup-swarm <nodes>"
+cloudfuzzer bastion setup-swarm <nodes>
 ```
 
 List of ip addresses of nodes should be given as argument for setup-swarm.sh
