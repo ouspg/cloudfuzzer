@@ -9,4 +9,4 @@ set -o nounset
 
 INSTANCE_NAME_PREFIX=$1;
 
-gcloud compute instances list | awk '$1 ~ /'$INSTANCE_NAME_PREFIX'/ {print $4}' | xargs
+gcloud compute instances list | awk '$1 ~ /'$INSTANCE_NAME_PREFIX'/ {print $(--NF)}' | xargs
