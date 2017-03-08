@@ -94,7 +94,7 @@ docker save $image | gzip > cloudfuzzer/context/docker-image
 ```
 Upload it:
 ```
-* send-docker-data cloudfuzzer/context
+send-docker-data cloudfuzzer/context
 ```
 
 ## Run containers
