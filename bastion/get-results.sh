@@ -3,8 +3,14 @@
 set -o errexit
 set -o nounset
 
-NODES=$(cat $HOME/address_nodes)
+if [ $# -eq 0 ]
+    then
+        NODES=$(cat $HOME/address_nodes)
+    else
+        NODES=$@
+fi
 
-for node in $NODES; do 
-	rsync -auP  rsync://$node:10873/volume/ results/
+# Rsync nodes
+for node in $NODES; do
+    rsync -auP  rsync://$node:10873/volume/ results/
 done

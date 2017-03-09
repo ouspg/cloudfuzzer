@@ -8,14 +8,8 @@ case $1 in
     "setup-swarm")
         "$DIR/setup-swarm.sh" ${@:2}
     ;;
-    "stop-containers")
-        echo "TODO"
-    ;;
     "run-containers")
         "$DIR/run-containers.sh" $2
-    ;;
-    "remove-containers")
-        echo "TODO"
     ;;
     "distribute-docker-image")
         "$DIR/distribute-docker-image.sh" $2
@@ -49,23 +43,16 @@ case $1 in
         echo "Selects first FuzzVM as swarm manager and triggers swarm-create on manager."
         echo "Usage cloudfuzzer setup-swarm <fuzzvm1> <fuzzvm2> ..."
     ;;
-    "stop-containers")
-        echo "Stop all the running containers"
-        echo "TODO"
-    ;;
     "run-containers")
         echo "Run containers. Takes number of containers to be run as an argument."
-    ;;
-    "remove-containers")
-        echo "Remove containers"
-        echo "TODO"
     ;;
     "distribute-docker-image")
         echo "Sends docker image from bastion to swarm nodes. Removes image after sending."
         echo "Usage: cloudfuzzer distribute-local-docker-image.sh <image-file>"
     ;;
     "get-results")
-        echo "Get results from fuzzvms"
+        echo "Get results from fuzzvm's. When no arguments are given results from all fuzzvm's are fetched."
+        echo "Otherwise it gets results from ip addresses of fuzzvm's given as arguments"
     ;;
     "get-stats")
         echo "Get stats from master fuzzvm"
@@ -75,13 +62,11 @@ case $1 in
     ;;
     *)
         echo "Available commands:"
-        echo "    get-results"
+        echo "    get-results (fuzzvm1) (fuzzvm2) ..."
         echo "    get-stats"
         echo "    distribute-docker-image"
-        echo "    remove-containers"
         echo "    run-containers <count>"
         echo "    setup-swarm <fuzzvm1> <fuzzvm2> ..."
-        echo "    stop-containers"
         if [ ! -z "$PS1" ]; then
             echo "    ssh-to-master"
         fi
