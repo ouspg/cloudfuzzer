@@ -27,9 +27,8 @@ cat /tmp/fuzzvm-key.pub >> $HOME/.ssh/authorized_keys
 
 #CloudFuzzer uses docker functionality that requires newer docker than what is available at Ubuntu apt repos.
 wget https://apt.dockerproject.org/repo/pool/main/d/docker-engine/docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb && \
-sudo dpkg  --install docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb 
+sudo dpkg  --install docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb && rm docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb
 sudo apt-get -f install -y 
-rm docker-engine_17.03.0~ce-0~ubuntu-xenial_amd64.deb
 
 #Add user to docker group
 sudo groupadd -f docker
