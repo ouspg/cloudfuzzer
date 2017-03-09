@@ -12,5 +12,5 @@ fi
 
 # Rsync nodes
 for node in $NODES; do
-	rsync -auP --no-links rsync://$node:10873/volume/ results/
+	rsync -auP --no-links --min-size=1 rsync://$node:10873/volume/ results/
 done
