@@ -22,7 +22,7 @@ COMMANDS=(
 for COMMAND in "${COMMANDS[@]}"; do 
     echo $COMMAND | tee -a $HOME/stats/cloudfuzzer-stats.log 
     timeout 10s $COMMAND | tee -a $HOME/stats/cloudfuzzer-stats.log 
-    echo ""
+    echo "" | tee -a $HOME/stats/cloudfuzzer-stats.log
 done
 
 timeout 10s docker service logs fuzz-service | gzip > $HOME/stats/fuzz-service-log.gz
