@@ -26,7 +26,7 @@ BASTION_USER bastion username
 
 Use following command to source cloudfuzzer functions
 ```
-source scripts/functions.bash.inc
+$ source scripts/functions.bash.inc
 ```
 
 Available commands (usage: cloudfuzzer &lt;command&gt;):
@@ -42,7 +42,7 @@ ssh - ssh to bastion
 
 To get help for specific command type
 ```
-cloudfuzzer <command> help
+$ cloudfuzzer <command> help
 ```
 
 ## ssh-keys
@@ -54,7 +54,7 @@ By default keys should be named bastion-key, bastion-key.pub and fuzzvm-key, fuz
 You can use following command to create rsa 4096 keys for you.
 
 ```
-cloudfuzzer create-keys
+$ cloudfuzzer create-keys
 ```
 
 Keys are provisioned so that bastion can access all machines created from fuzzvm-image, and fuzzvm can access all other fuzzvms and bastion.
@@ -76,12 +76,12 @@ After that you can build images with following commands (Google Cloud)
 
 __Bastion__
 ```
-packer build -only=gcloud -var-file=/path/to/your/variables.json packer-bastion.json
+$ packer build -only=gcloud -var-file=/path/to/your/variables.json packer-bastion.json
 ```
 
 __Fuzzvm__
 ```
-packer build -only=gcloud -var-file=/path/to/your/variables.json packer-fuzzvm.json
+$ packer build -only=gcloud -var-file=/path/to/your/variables.json packer-fuzzvm.json
 ```
 
 * If you want to use aws use -only=aws
@@ -99,7 +99,7 @@ Bastion should have access public ip so it can be accessed from outside network 
 ## Setting it up
 
 ```
-cloudfuzzer bastion setup-swarm <nodes>
+$ cloudfuzzer bastion setup-swarm <nodes>
 ```
 
 List of ip addresses of nodes should be given as argument for setup-swarm.sh
@@ -108,7 +108,7 @@ List of ip addresses of nodes should be given as argument for setup-swarm.sh
 
 Save docker image to cloudfuzzer/context :
 ```
-docker save $image | gzip > cloudfuzzer/context/docker-image
+$ docker save $image | gzip > cloudfuzzer/context/docker-image
 ```
 
 Docker arguments should be defined in context/docker-options  
@@ -119,7 +119,7 @@ Example:
 
 Upload context:
 ```
-send-docker-data cloudfuzzer/context
+$ send-docker-data cloudfuzzer/context
 ```
 
 ## Run containers
@@ -127,15 +127,15 @@ send-docker-data cloudfuzzer/context
 Run number of containers
 
 ```
-cloudfuzzer bastion run-containers <count>
+$ cloudfuzzer bastion run-containers <count>
 ```
 
 ## Get results
 
-Get results
+Get results from fuzzvm's. If no ip-adresses are given as argument results from all fuzzvm's are fetched.
 
 ```
-cloudfuzzer bastion get-results
+$ cloudfuzzer bastion get-results (fuzzvm1) (fuzzvm2) ...
 ```
 
 ## Get stats
@@ -143,7 +143,7 @@ cloudfuzzer bastion get-results
 Get stats
 
 ```
-cloudfuzzer bastion get-stats
+$ cloudfuzzer bastion get-stats
 ```
 
 
