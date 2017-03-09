@@ -16,11 +16,12 @@ Example script for setup in GCE is found in [tests/gce-tests/gce-setup.sh](tests
 
 Config file of cloudfuzzer is named cloudfuzzer.conf
 user.conf overrides cloudfuzzer.conf.
-```
+
 Following variables are used:
-BASTION bastion address
-SSH_OPTS ssh options
-BASTION_USER bastion username
+```
+BASTION_ADDRESS="xxx.xxx.xxx.xxx" # IP address of bastion
+SSH_OPTS="-o StrictHostKeyChecking=no -i $CLOUDFUZZER_DIR/vm-keys/bastion-key" # SSH options
+BASTION_USER="ubuntu" # Bastion username
 ```
 ## cloudfuzzer
 
