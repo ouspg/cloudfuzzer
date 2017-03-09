@@ -15,7 +15,7 @@ case $1 in
         "$DIR/distribute-docker-image.sh" $2
     ;;
     "get-results")
-        "$DIR/get-results.sh"
+        "$DIR/get-results.sh ${@:2}"
     ;;
     "get-stats")
         "$DIR/get-stats.sh"
