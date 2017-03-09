@@ -143,7 +143,39 @@ $ cloudfuzzer bastion get-results (fuzzvm1) (fuzzvm2) ...
 Get stats
 
 ```
-$ cloudfuzzer bastion get-stats
+$ cloudfuzzer get-stats <destionation>
+docker service list
+ID            NAME                    MODE        REPLICAS  IMAGE
+nsbg1dh6t2k1  fuzz-service            replicated  70/70     p7zip-fuzz
+xl3l65kufl66  rsync-volume-container  global      10/10     nabeken/docker-volume-container-rsync
+
+docker service inspect fuzz-service --pretty
+
+ID:             nsbg1dh6t2k1biiroyf92oukf
+Name:           fuzz-service
+Service Mode:   Replicated
+ Replicas:      70
+Placement:
+UpdateConfig:
+ Parallelism:   1
+ On failure:    pause
+ Max failure ratio: 0
+ContainerSpec:
+ Image:         p7zip-fuzz
+Mounts:
+  Target = /output
+   Source = rsync-volume-container
+   ReadOnly = false
+   Type = volume
+Resources:
+ Reservations:
+  Memory:       500 MiB
+Endpoint Mode:  vip
+
+docker service ps fuzz-service
+ID            NAME             IMAGE       NODE       DESIRED STATE  CURRENT STATE        ERROR  PORTS
+7iadtdvc3dsc  fuzz-service.1   p7zip-fuzz  fuzzvm-8   Running        Running 2 hours ago         
+81qsodiixxee  fuzz-service.2   p7zip-fuzz  fuzzvm-6   Running        Running 2 hours ago
 ```
 
 
