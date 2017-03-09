@@ -8,7 +8,7 @@ fi
 
 DOCKER_COMMAND="docker service create --name fuzz-service --replicas $COUNT \
 	--mount type=volume,source=rsync-volume-container,destination=/output \
-	$(cat $HOME/docker-arguments);"
+	--restart-condition none $(cat $HOME/docker-arguments);"
 
 echo "Starting fuzz-service:"
 echo "Instances: $COUNT"
