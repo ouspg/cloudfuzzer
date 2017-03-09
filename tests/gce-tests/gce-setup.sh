@@ -47,6 +47,6 @@ if (( $# == 2 )); then
 
 	cloudfuzzer get-results ./test-results;
 else
-	echo "Illegal number of arguments given. Two required: packer variables file and context directory."
-	echo "Usage ./gce-setup <variables> <context>"
+	echo "Illegal number of arguments given."
+	echo "Usage: ./gce-setup <variables> <context>"
 fi
