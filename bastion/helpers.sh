@@ -63,14 +63,22 @@ case $1 in
     "get-stats")
         echo "Get stats from master fuzzvm"
     ;;
+    "result-autosync-disable")
+        echo "Disable autosync of results"
+    ;;
+    "result-autosync-enable")
+        echo "Enable autosync of results"
+    ;;
     "ssh-to-master")
         echo "ssh to fuzzvm swarm master"
     ;;
     *)
         echo "Available commands:"
+        echo "    distribute-docker-image"
         echo "    get-results (fuzzvm1) (fuzzvm2) ..."
         echo "    get-stats"
-        echo "    distribute-docker-image"
+        echo "    result-autosync-disable"
+        echo "    result-autosync-enable"
         echo "    run-containers <count>"
         echo "    setup-swarm <fuzzvm1> <fuzzvm2> ..."
         if [ ! -z "$PS1" ]; then
