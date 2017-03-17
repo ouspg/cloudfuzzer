@@ -20,6 +20,12 @@ case $1 in
     "get-stats")
         "$DIR/get-stats.sh"
     ;;
+    "result-autosync-enable")
+        (crontab -u ubuntu -l ; echo "*/15 * * * * /home/ubuntu/get-results.sh") | crontab -u ubuntu -
+    ;;
+    "result-autosync-disable")
+        crontab -u ubuntu -l | grep -v '/home/ubuntu/get-results.sh'  | crontab -u ubuntu -
+    ;;
     "ssh-to-master")
         if [ -z "$PS1" ]; then
             echo "This command can only be used with interative shell"
