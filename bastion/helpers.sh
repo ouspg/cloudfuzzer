@@ -20,6 +20,12 @@ case $1 in
     "get-stats")
         "$DIR/get-stats.sh"
     ;;
+    "result-autosync-enable")
+        (crontab -u ubuntu -l ; echo "*/15 * * * * /home/ubuntu/get-results.sh") | crontab -u ubuntu -
+    ;;
+    "result-autosync-disable")
+        crontab -u ubuntu -l | grep -v '/home/ubuntu/get-results.sh'  | crontab -u ubuntu -
+    ;;
     "ssh-to-master")
         if [ -z "$PS1" ]; then
             echo "This command can only be used with interative shell"
@@ -57,14 +63,22 @@ case $1 in
     "get-stats")
         echo "Get stats from master fuzzvm"
     ;;
+    "result-autosync-disable")
+        echo "Disable autosync of results"
+    ;;
+    "result-autosync-enable")
+        echo "Enable autosync of results"
+    ;;
     "ssh-to-master")
         echo "ssh to fuzzvm swarm master"
     ;;
     *)
         echo "Available commands:"
+        echo "    distribute-docker-image"
         echo "    get-results (fuzzvm1) (fuzzvm2) ..."
         echo "    get-stats"
-        echo "    distribute-docker-image"
+        echo "    result-autosync-disable"
+        echo "    result-autosync-enable"
         echo "    run-containers <count>"
         echo "    setup-swarm <fuzzvm1> <fuzzvm2> ..."
         if [ ! -z "$PS1" ]; then
